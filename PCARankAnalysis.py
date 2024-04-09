@@ -35,13 +35,13 @@ def concat_word_embeddings(D):
     D_avg = get_word_embeddings(D, "average_combination")
     D_LSA = get_word_embeddings(D, "LSA_combination")
     D_Cos = get_word_embeddings(D, "COS_combination")
-    # Label is different for every dataset
-    alpha_column_label = list(list(D.columns).filter(lambda x: "alpha_combination_" in x))[0]
-    D_alpha = get_word_embeddings(D, alpha_column_label)
+    D_alpha = get_word_embeddings(D, "alpha_combination")
     D_stim = np.concatenate((D_stim, D_avg, D_LSA, D_Cos, D_alpha))
 
+    return D_stim
 
-def plot_rows(D, rows):
+
+def plot_rows(D, rows, stim_label):
     TOTAL_ROWS = 2486
 
     # Use PCA
@@ -64,7 +64,7 @@ def plot_rows(D, rows):
         plt.scatter(embedding_lowdim[4*TOTAL_ROWS+i,0], embedding_lowdim[4*TOTAL_ROWS+i,1], color=color, marker='X', label="Alpha Combination")
 
     for i in rows:
-        plt.text(embedding_lowdim[i,0],embedding_lowdim[i,1],D["stim"][i],fontsize=10)
+        plt.text(embedding_lowdim[i,0],embedding_lowdim[i,1],stim_label[i],fontsize=10)
 
     plt.show()
 
@@ -80,39 +80,15 @@ if __name__ == "__main__":
     LSA_HEAD_ROWS = D.sort_values("Rank_LSA").head(5).index.to_numpy()
     AVG_HEAD_ROWS = D.sort_values("Rank_avg").head(5).index.to_numpy()
     COS_HEAD_ROWS = D.sort_values("Rank_COS").head(5).index.to_numpy()
-    alpha_column_label = list(filter(lambda x: "Rank_alpha_" in x, D.columns))[0]
-    # ALPHA_HEAD_ROWS = D.sort_values(alpha_column_label).head(5).index.to_numpy()
     ALPHA_HEAD_ROWS = D.sort_values("Rank_alpha").head(5).index.to_numpy()
     LSA_TAIL_ROWS = D.sort_values("Rank_LSA").tail(5).index.to_numpy()
     AVG_TAIL_ROWS = D.sort_values("Rank_avg").tail(5).index.to_numpy()
     COS_TAIL_ROWS = D.sort_values("Rank_COS").tail(5).index.to_numpy()
-    # ALPHA_TAIL_ROWS = D.sort_values(alpha_column_label).tail(5).index.to_numpy()
     ALPHA_TAIL_ROWS = D.sort_values("Rank_alpha").tail(5).index.to_numpy()
-
-    # TODO delete this
-    ROWS = [
-        ("LSA", LSA_HEAD_ROWS),
-        ("avg", AVG_HEAD_ROWS),
-        ("COS", COS_HEAD_ROWS),
-        ("LSA", LSA_TAIL_ROWS),
-        ("avg", AVG_TAIL_ROWS),
-        ("COS", COS_TAIL_ROWS),
-    ]
-    for i, row in enumerate(ROWS):
-        print("rows ", i)
-        print(D["stim"][row[1]], D["Rank_"+row[0]][row[1]])
-    # print("LSA Head Rows:", D["stim"][LSA_HEAD_ROWS], D["Rank_LSA"][LSA_HEAD_ROWS])
-    # print("Average Head Rows:", D["stim"][AVG_HEAD_ROWS], D["Rank_avg"][AVG_HEAD_ROWS])
-    # print("COS Head Rows:", D["stim"][COS_HEAD_ROWS], D["Rank_COS"][COS_HEAD_ROWS])
-    # print("Alpha Head Rows:", D["stim"][ALPHA_HEAD_ROWS])
-    # print("LSA Tail Rows:", D["stim"][LSA_TAIL_ROWS])
-    # print("Average Tail Rows:", D["stim"][AVG_TAIL_ROWS])
-    # print("COS Tail Rows:", D["stim"][COS_TAIL_ROWS])
-    # print("Alpha Tail Rows:", D["stim"][ALPHA_TAIL_ROWS])
 
 
     # Concatenate word embeddings
-    # D = concat_word_embeddings(D) # TODO: Uncomment this line
+    D_embeddings = concat_word_embeddings(D)
 
     # Plot rows: Change second parameter to the desired rows to plot
-    # plot_rows(D, ROWS) # TODO: Uncomment this line
+    plot_rows(D_embeddings, LSA_HEAD_ROWS, D["stim"])

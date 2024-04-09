@@ -39,8 +39,8 @@ def calculate_ranks_and_mrr(data, combination_col,
     for idx, row in data.iterrows():
 
         current_combination_similarity = cosine_similarity(
-                np.array(row[combination_col]).reshape(1, -1),
-                np.array(row['stim_embedding']).reshape(1, -1))[0][0]
+            np.array(row[combination_col]).reshape(1, -1),
+            np.array(row['stim_embedding']).reshape(1, -1))[0][0]
 
         # Get all similarities of the current stim_embedding to all others
         # stim_embeddings from the similarity matrix
@@ -81,7 +81,7 @@ def find_closest_embeddings(data, similarity_matrix, top_n=1):
         # Map the indices to the specified column's values for corresponding
         # compound-words(stim)
         closest_compounds = (data.iloc[closest_indices]['stim'].
-                             reset_index(drop=True))
+                                reset_index(drop=True))
     else:
         # Find the indices of the top N max similarities for each row
         closest_indices = np.argsort(similarity_matrix, axis=1)[:, -top_n:]
@@ -89,7 +89,7 @@ def find_closest_embeddings(data, similarity_matrix, top_n=1):
         # compound-words(stim)
         closest_compounds = pd.Series(
             [data.iloc[indices]['stim'].values.tolist() for indices in
-             closest_indices], index=data.index)
+                closest_indices], index=data.index)
 
     return closest_compounds
 

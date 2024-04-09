@@ -1,35 +1,42 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import random
+
+def random_chance_MRR(rows):
+    ranks = 0
+    for _ in range(rows):
+        ranks += 1 / random.randint(1, rows)
+    mrr = ranks / rows
+    return mrr
 
 def plot_MRR(dfs, legend):
-    MRR = np.zeros((len(dfs), 4))
+    MRR = np.zeros((len(dfs), 5))
 
     for i, data in enumerate(dfs):
-        # alpha_label = list(filter(lambda x: "MRR_alpha_" in x, data.columns))[0]
         MRR[i][0] = data["MRR_avg"][0]
         MRR[i][1] = data["MRR_LSA"][0]
         MRR[i][2] = data["MRR_COS"][0]
         MRR[i][3] = data["MRR_alpha"][0]
+        MRR[i][4] = random_chance_MRR(data.shape[0])
     
 
     fig, ax = plt.subplots()
     fig.set_size_inches(10, 5)
-    ax.plot(["avg", "LSA", "Cos", "alpha"], MRR.T, 'o')
-    ax.legend(legend, loc="upper right", bbox_to_anchor=(0.9, 1))
+    ax.plot(["avg", "LSA", "Cos", "alpha", "chance"], MRR.T, 'o')
+    ax.legend(legend, loc="upper right", bbox_to_anchor=(1, 1))
     ax.set_xlabel("Combination Type", fontsize=10)
     ax.set_ylabel("MRR", fontsize=10)
 
     plt.show()
 
+
 def plot_alpha(dfs, legend):
     alpha = []
 
     for data in dfs:
-        alpha_value = list(filter(lambda x: "alpha_combination_" in x, data.columns))[0]
-        alpha.append(float(alpha_value[18:]))
+        alpha.append(float(data["alpha"][0]))
     
-    print(alpha)
     fig, ax = plt.subplots()
     fig.set_size_inches(10, 5)
     ax.plot(legend, alpha, 'o')
@@ -57,6 +64,8 @@ if __name__ == "__main__":
     legend = [path.split("_")[1][5:] for path in glove_paths]
     DFs = [pd.read_csv(path) for path in glove_paths]
 
+    # MRR analysis
+    print
     plot_MRR(DFs, legend)
 
     #  Alpha analysis
