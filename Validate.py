@@ -5,12 +5,23 @@ from sklearn.model_selection import train_test_split
 import copy
 
 
-# Generate a matrix of cos similarities for all pairs of stim_embedding value
-def generate_similarity_matrix(data):
-    # Get the stim_embeddings column
-    stim_embeddings = np.stack(data['stim_embedding'].values)
-    # Get cos similarity of all pairs of values as a matrix
-    similarity_matrix = cosine_similarity(stim_embeddings)
+# Generate a matrix of cos similarities for all pairs of embedding values
+# between a given column and stim_embedding column, if column is not specified,
+# the stim_embedding column will compare with itself to produce the
+# similarity matrix
+def generate_similarity_matrix(data, column=None):
+    # Get the stim_embedding column
+    column1_embeddings = np.stack(data['stim_embedding'].values)
+    # If no 2nd column is specified in input, compare stim_embedding against
+    # itself
+    if column is None:
+        similarity_matrix = cosine_similarity(column1_embeddings,
+                                                column1_embeddings)
+    else:
+        # If 2nd column is specified, compare stim_embedding against it
+        column2_embeddings = np.stack(data[column].values)
+        similarity_matrix = cosine_similarity(column1_embeddings,
+                                                column2_embeddings)
     return similarity_matrix
 
 
@@ -54,21 +65,31 @@ def calculate_ranks_and_mrr(data, combination_col,
     return ranks, mrr, closest
 
 
-# Find the closest compound word embedding for every row's compound word
-# embedding in the provided dataframe, return a panda series with index matching
-# the row index in the dataframe.
-def find_closest_embeddings(data, similarity_matrix):
-    # Make sure the index is aligned with the rows
-    data = data.reset_index(drop=True)
+# Find the n-closest(default=1) compound-word embedding(stim_embedding) for the
+# embeddings used in the cos similarity matrix (stim by default), return a panda
+# series with index matching the row index in the dataframe.
+def find_closest_embeddings(data, similarity_matrix, top_n=1):
+    # Making sure that the row index is correct
+    data.reset_index(drop=True, inplace=True)
 
-    # Ignore diagonal to exclude self-similarity
+    # Ignore the diagonal to exclude self comparison
     np.fill_diagonal(similarity_matrix, 0)
 
-    # Find index of the max similarity score for each row
-    closest_indices = np.argmax(similarity_matrix, axis=1)
-
-    # Map the indices to compound words
-    closest_compounds = data.iloc[closest_indices]['stim'].reset_index(drop=True)
+    if top_n == 1:
+        # Find the index of the max similarity for each row
+        closest_indices = np.argmax(similarity_matrix, axis=1)
+        # Map the indices to the specified column's values for corresponding
+        # compound-words(stim)
+        closest_compounds = (data.iloc[closest_indices]['stim'].
+                             reset_index(drop=True))
+    else:
+        # Find the indices of the top N max similarities for each row
+        closest_indices = np.argsort(similarity_matrix, axis=1)[:, -top_n:]
+        # Map the indices to the specified column's values for corresponding
+        # compound-words(stim)
+        closest_compounds = pd.Series(
+            [data.iloc[indices]['stim'].values.tolist() for indices in
+             closest_indices], index=data.index)
 
     return closest_compounds
 
@@ -82,6 +103,7 @@ def create_alpha_column(data, alpha):
     df = data["c1_embedding"]*alpha + data["c2_embedding"]*(1-alpha)
     df.rename("alpha_combination_"+str(alpha), inplace=True)
     return df
+
 
 def get_best_alpha_combination(path, closest_compounds):
     # Load the dataframe from the pickle file
@@ -171,17 +193,35 @@ if __name__ == "__main__":
 
         # Assign them to data as new columns
         data['Rank_avg'] = ranks_avg
-        data['MRR_avg'] = mrr_avg
-        data['Rank_1_avg'] = closest_avg
         data['Rank_LSA'] = ranks_lsa
-        data['MRR_LSA'] = mrr_lsa
-        data['Rank_1_LSA'] = closest_lsa
         data['Rank_COS'] = ranks_cos
-        data['MRR_COS'] = mrr_cos
-        data['Rank_1_COS'] = closest_cos
         data['Rank_alpha'] = ranks_alpha
+        data['MRR_avg'] = mrr_avg
+        data['MRR_LSA'] = mrr_lsa
+        data['MRR_COS'] = mrr_cos
         data['MRR_alpha'] = mrr_alpha
+        data['Rank_1_avg'] = closest_avg
+        data['Rank_1_LSA'] = closest_lsa
+        data['Rank_1_COS'] = closest_cos
         data['Rank_1_alpha'] = closest_alpha
+
+        # find top3 closest compound words for each method
+        top3_closest_avg = find_closest_embeddings(data,
+                    generate_similarity_matrix(data,'average_combination'),
+                                                    top_n=3)
+        top3_closest_lsa = find_closest_embeddings(data,
+                    generate_similarity_matrix( data, 'LSA_combination'),
+                                                    top_n=3)
+        top3_closest_cos = find_closest_embeddings(data,
+                    generate_similarity_matrix( data, 'COS_combination'),
+                                                    top_n=3)
+        top3_closest_alpha = find_closest_embeddings(data,
+                    generate_similarity_matrix( data, 'alpha_combination'),
+                                                    top_n=3)
+        data['Top3_Closest_avg'] = top3_closest_avg
+        data['Top3_Closest_LSA'] = top3_closest_lsa
+        data['Top3_Closest_COS'] = top3_closest_cos
+        data['Top3_Closest_alpha'] = top3_closest_alpha
 
         # Save to pickle
         data.to_pickle(path)
