@@ -11,6 +11,3 @@ To reproduce, first download the [Glove datasets](https://nlp.stanford.edu/proje
 3. Validate.py - Adds a column for best alpha combination. Computes rank and MRR for Average, LSA, and Cosine combinations.
 4. Bootstrap.py - Bootstrapping to determine confidence intervals for MRR
 5. PCARankAnalysis.py - Visualizes top 5 and lowest 5 ranked words for Average, LSA, and Cosine combinations
-
-
-test
