@@ -1,0 +1,130 @@
+----------------------------------------------------------------------------------------------------
+glove6B50d - Bootstrap MRR Analysis
+----------------------------------------------------------------------------------------------------
+glove6B50d - average_combination bootstrap mean MRR: 0.04575654377602386
+glove6B50d - average_combination MRR is within the 95% CI [0.04568107916361992, 0.0458320083884278]
+glove6B50d - LSA_combination bootstrap mean MRR: 0.05578118228842036
+glove6B50d - LSA_combination MRR is within the 95% CI [0.055695856726979194, 0.05586650784986153]
+glove6B50d - COS_combination bootstrap mean MRR: 0.05797261689493484
+glove6B50d - COS_combination MRR is within the 95% CI [0.05788603065497306, 0.05805920313489662]
+----------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------
+glove6B100d - Bootstrap MRR Analysis
+----------------------------------------------------------------------------------------------------
+glove6B100d - average_combination bootstrap mean MRR: 0.0627927621210343
+glove6B100d - average_combination MRR is within the 95% CI [0.06270315071585769, 0.0628823735262109]
+glove6B100d - LSA_combination bootstrap mean MRR: 0.07374607853700013
+glove6B100d - LSA_combination MRR is within the 95% CI [0.07364895291668934, 0.07384320415731092]
+glove6B100d - COS_combination bootstrap mean MRR: 0.07774187959961545
+glove6B100d - COS_combination MRR is within the 95% CI [0.07763980062211841, 0.0778439585771125]
+----------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------
+glove6B200d - Bootstrap MRR Analysis
+----------------------------------------------------------------------------------------------------
+glove6B200d - average_combination bootstrap mean MRR: 0.07994131798321272
+glove6B200d - average_combination MRR is within the 95% CI [0.07984392825633906, 0.08003870771008638]
+glove6B200d - LSA_combination bootstrap mean MRR: 0.09525575570002687
+glove6B200d - LSA_combination MRR is within the 95% CI [0.09514687754893159, 0.09536463385112215]
+glove6B200d - COS_combination bootstrap mean MRR: 0.098979854619156
+glove6B200d - COS_combination MRR is within the 95% CI [0.09886941059614901, 0.09909029864216298]
+----------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------
+glove6B300d - Bootstrap MRR Analysis
+----------------------------------------------------------------------------------------------------
+glove6B300d - average_combination bootstrap mean MRR: 0.07934428658584007
+glove6B300d - average_combination MRR is within the 95% CI [0.07924366070049833, 0.07944491247118181]
+glove6B300d - LSA_combination bootstrap mean MRR: 0.09281634242022754
+glove6B300d - LSA_combination MRR is within the 95% CI [0.0927073698239635, 0.09292531501649158]
+glove6B300d - COS_combination bootstrap mean MRR: 0.0969678390407889
+glove6B300d - COS_combination MRR is within the 95% CI [0.09685643364384702, 0.09707924443773078]
+----------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------
+glove42B300d - Bootstrap MRR Analysis
+----------------------------------------------------------------------------------------------------
+glove42B300d - average_combination bootstrap mean MRR: 0.18020201867333313
+glove42B300d - average_combination MRR is within the 95% CI [0.1800667988314847, 0.18033723851518157]
+glove42B300d - LSA_combination bootstrap mean MRR: 0.1888661765597078
+glove42B300d - LSA_combination MRR is within the 95% CI [0.18872532769459044, 0.18900702542482517]
+glove42B300d - COS_combination bootstrap mean MRR: 0.20585293655646442
+glove42B300d - COS_combination MRR is within the 95% CI [0.20570772932835654, 0.2059981437845723]
+----------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------
+glove840B300d - Bootstrap MRR Analysis
+----------------------------------------------------------------------------------------------------
+glove840B300d - average_combination bootstrap mean MRR: 0.1304529352796639
+glove840B300d - average_combination MRR is within the 95% CI [0.13033428276293196, 0.13057158779639583]
+glove840B300d - LSA_combination bootstrap mean MRR: 0.14173369683889633
+glove840B300d - LSA_combination MRR is within the 95% CI [0.14160710560364764, 0.14186028807414502]
+glove840B300d - COS_combination bootstrap mean MRR: 0.1561176687216935
+glove840B300d - COS_combination MRR is within the 95% CI [0.15598769891895273, 0.15624763852443427]
+----------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------
+glovetwitter27B25d - Bootstrap MRR Analysis
+----------------------------------------------------------------------------------------------------
+glovetwitter27B25d - average_combination bootstrap mean MRR: 0.019345873533732096
+glovetwitter27B25d - average_combination MRR is within the 95% CI [0.019292618940270668, 0.019399128127193525]
+glovetwitter27B25d - LSA_combination bootstrap mean MRR: 0.022343785646424533
+glovetwitter27B25d - LSA_combination MRR is within the 95% CI [0.022284352844973144, 0.022403218447875923]
+glovetwitter27B25d - COS_combination bootstrap mean MRR: 0.0220342078216225
+glovetwitter27B25d - COS_combination MRR is within the 95% CI [0.021976857252515566, 0.022091558390729432]
+----------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------
+glovetwitter27B50d - Bootstrap MRR Analysis
+----------------------------------------------------------------------------------------------------
+glovetwitter27B50d - average_combination bootstrap mean MRR: 0.03556491178873522
+glovetwitter27B50d - average_combination MRR is within the 95% CI [0.035487402619716425, 0.035642420957754016]
+glovetwitter27B50d - LSA_combination bootstrap mean MRR: 0.04003491027562825
+glovetwitter27B50d - LSA_combination MRR is within the 95% CI [0.039952669526375155, 0.040117151024881344]
+glovetwitter27B50d - COS_combination bootstrap mean MRR: 0.04180631245450685
+glovetwitter27B50d - COS_combination MRR is within the 95% CI [0.041722142963617356, 0.04189048194539634]
+----------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------
+glovetwitter27B100d - Bootstrap MRR Analysis
+----------------------------------------------------------------------------------------------------
+glovetwitter27B100d - average_combination bootstrap mean MRR: 0.061117060668145665
+glovetwitter27B100d - average_combination MRR is within the 95% CI [0.06101093381606099, 0.061223187520230336]
+glovetwitter27B100d - LSA_combination bootstrap mean MRR: 0.06745888360481787
+glovetwitter27B100d - LSA_combination MRR is within the 95% CI [0.0673469109694056, 0.06757085624023015]
+glovetwitter27B100d - COS_combination bootstrap mean MRR: 0.07081768547369768
+glovetwitter27B100d - COS_combination MRR is within the 95% CI [0.07070347641243264, 0.07093189453496272]
+----------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------
+glovetwitter27B200d - Bootstrap MRR Analysis
+----------------------------------------------------------------------------------------------------
+glovetwitter27B200d - average_combination bootstrap mean MRR: 0.10075135200157855
+glovetwitter27B200d - average_combination MRR is within the 95% CI [0.1006140554456114, 0.10088864855754569]
+glovetwitter27B200d - LSA_combination bootstrap mean MRR: 0.1062925504847566
+glovetwitter27B200d - LSA_combination MRR is within the 95% CI [0.10615311948013116, 0.10643198148938203]
+glovetwitter27B200d - COS_combination bootstrap mean MRR: 0.11413233318972905
+glovetwitter27B200d - COS_combination MRR is within the 95% CI [0.11398686666653154, 0.11427779971292656]
+----------------------------------------------------------------------------------------------------
+
+
+
