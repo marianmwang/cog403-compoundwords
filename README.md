@@ -14,6 +14,8 @@ To fully reproduce, first download the [GloVe datasets](https://nlp.stanford.edu
 
 
 # How to read the data
+====ConfidenceInterval.txt=====\
+Contains 95% confidence interval test for all MRR values from each combination method in each data file.
 ====Extracted from LaDEC=====\
 c1:constituent 1\
 c2:constituent 2\
