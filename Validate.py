@@ -14,13 +14,13 @@ def generate_similarity_matrix(data, column=None):
     # If no 2nd column is specified in input, compare stim_embedding against
     # itself
     if column is None:
-        similarity_matrix = cosine_similarity(column1_embeddings.
-                                              column1_embeddings)
+        similarity_matrix = cosine_similarity(column1_embeddings,
+                                                column1_embeddings)
     else:
         # If 2nd column is specified, compare stim_embedding against it
         column2_embeddings = np.stack(data[column].values)
         similarity_matrix = cosine_similarity(column1_embeddings,
-                                              column2_embeddings)
+                                                column2_embeddings)
     return similarity_matrix
 
 
@@ -38,8 +38,8 @@ def calculate_ranks_and_mrr(data, combination_col,
     for idx, row in data.iterrows():
 
         current_combination_similarity = cosine_similarity(
-                np.array(row[combination_col]).reshape(1, -1),
-                np.array(row['stim_embedding']).reshape(1, -1))[0][0]
+            np.array(row[combination_col]).reshape(1, -1),
+            np.array(row['stim_embedding']).reshape(1, -1))[0][0]
 
         # Get all similarities of the current stim_embedding to all others
         # stim_embeddings from the similarity matrix
@@ -80,7 +80,7 @@ def find_closest_embeddings(data, similarity_matrix, top_n=1):
         # Map the indices to the specified column's values for corresponding
         # compound-words(stim)
         closest_compounds = (data.iloc[closest_indices]['stim'].
-                             reset_index(drop=True))
+                                reset_index(drop=True))
     else:
         # Find the indices of the top N max similarities for each row
         closest_indices = np.argsort(similarity_matrix, axis=1)[:, -top_n:]
@@ -88,10 +88,65 @@ def find_closest_embeddings(data, similarity_matrix, top_n=1):
         # compound-words(stim)
         closest_compounds = pd.Series(
             [data.iloc[indices]['stim'].values.tolist() for indices in
-             closest_indices], index=data.index)
+                closest_indices], index=data.index)
 
     return closest_compounds
 
+
+# From https://stackoverflow.com/questions/42021972/truncating-decimal-digits-numpy-array-of-floats 
+def trunc(values, decs=0):
+    return np.trunc(values*10**decs)/(10**decs)
+
+
+def create_alpha_column(data, alpha):
+    df = data["c1_embedding"]*alpha + data["c2_embedding"]*(1-alpha)
+    df.rename("alpha_combination_"+str(alpha), inplace=True)
+    return df
+
+
+def get_best_alpha_combination(path, closest_compounds):
+    # Load the dataframe from the pickle file
+    data = pd.read_pickle(path)
+    # Reset the index for proper alignment, otherwise might have null values
+    data.reset_index(drop=True, inplace=True)
+
+    # Create a new column for each alpha combination from 0 to 1 in steps of 0.01
+    alphas = (create_alpha_column(data, alpha) for alpha in np.arange(0, 1.01, 0.01))
+    alphas_df = pd.concat(alphas, axis=1)
+    data = pd.concat([data, alphas_df], axis=1)
+    
+    alphas = []
+    # Perform 5-fold cross validation
+    for _ in range(5):
+        # Split data 80/20 train/test
+        train, test = train_test_split(data, test_size=0.2)
+
+        # Reset the index for proper alignment, otherwise might have null values
+        train.reset_index(drop=True, inplace=True)
+        test.reset_index(drop=True, inplace=True)
+
+        best_alpha = 0
+        best_mrr = 0
+        train_similarity_matrix = generate_similarity_matrix(train)
+
+        # Try all alphas on the training set to get best alpha
+        for step in range(101):
+            alpha = 0.01 * step
+            _, mrr, _ = calculate_ranks_and_mrr(
+            train, "alpha_combination_"+str(alpha),
+            train_similarity_matrix, closest_compounds
+            )
+
+            if (mrr > best_mrr):
+                best_alpha = alpha
+                best_mrr = mrr
+
+        alphas.append(best_alpha)
+
+    # Take average of alphas from all 5 folds as the best alpha
+    best_alpha = np.average(alphas)
+    return trunc(best_alpha, 2)
+    
 
 if __name__ == "__main__":
     paths = [
@@ -132,27 +187,33 @@ if __name__ == "__main__":
         data['Rank_avg'] = ranks_avg
         data['Rank_LSA'] = ranks_lsa
         data['Rank_COS'] = ranks_cos
+        data['Rank_alpha'] = ranks_alpha
         data['MRR_avg'] = mrr_avg
         data['MRR_LSA'] = mrr_lsa
         data['MRR_COS'] = mrr_cos
+        data['MRR_alpha'] = mrr_alpha
         data['Rank_1_avg'] = closest_avg
         data['Rank_1_LSA'] = closest_lsa
         data['Rank_1_COS'] = closest_cos
+        data['Rank_1_alpha'] = closest_alpha
 
         # find top3 closest compound words for each method
         top3_closest_avg = find_closest_embeddings(data,
-                 generate_similarity_matrix(data,'average_combination'),
-                                                   top_n=3)
+                    generate_similarity_matrix(data,'average_combination'),
+                                                    top_n=3)
         top3_closest_lsa = find_closest_embeddings(data,
-                 generate_similarity_matrix( data, 'LSA_combination'),
-                                                   top_n=3)
+                    generate_similarity_matrix( data, 'LSA_combination'),
+                                                    top_n=3)
         top3_closest_cos = find_closest_embeddings(data,
-                 generate_similarity_matrix( data, 'COS_combination'),
-                                                   top_n=3)
+                    generate_similarity_matrix( data, 'COS_combination'),
+                                                    top_n=3)
+        top3_closest_alpha = find_closest_embeddings(data,
+                    generate_similarity_matrix( data, 'alpha_combination'),
+                                                    top_n=3)
         data['Top3_Closest_avg'] = top3_closest_avg
         data['Top3_Closest_LSA'] = top3_closest_lsa
         data['Top3_Closest_COS'] = top3_closest_cos
-
+        data['Top3_Closest_alpha'] = top3_closest_alpha
 
         # Save to pickle
         data.to_pickle(path)
