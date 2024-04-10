@@ -7,6 +7,8 @@ glove6B50d - LSA_combination bootstrap mean MRR: 0.05578118228842036
 glove6B50d - LSA_combination MRR is within the 95% CI [0.055695856726979194, 0.05586650784986153]
 glove6B50d - COS_combination bootstrap mean MRR: 0.05797261689493484
 glove6B50d - COS_combination MRR is within the 95% CI [0.05788603065497306, 0.05805920313489662]
+glove6B50d - alpha_combination bootstrap mean MRR: 0.04913693775784949
+glove6B50d - alpha_combination MRR is within the 95% CI [0.04893144883050153, 0.04934242668519745]
 ----------------------------------------------------------------------------------------------------
 
 
@@ -20,6 +22,8 @@ glove6B100d - LSA_combination bootstrap mean MRR: 0.07374607853700013
 glove6B100d - LSA_combination MRR is within the 95% CI [0.07364895291668934, 0.07384320415731092]
 glove6B100d - COS_combination bootstrap mean MRR: 0.07774187959961545
 glove6B100d - COS_combination MRR is within the 95% CI [0.07763980062211841, 0.0778439585771125]
+glove6B100d - alpha_combination bootstrap mean MRR: 0.06343475483737301
+glove6B100d - alpha_combination MRR is within the 95% CI [0.06320638459276938, 0.06366312508197665]
 ----------------------------------------------------------------------------------------------------
 
 
@@ -33,6 +37,8 @@ glove6B200d - LSA_combination bootstrap mean MRR: 0.09525575570002687
 glove6B200d - LSA_combination MRR is within the 95% CI [0.09514687754893159, 0.09536463385112215]
 glove6B200d - COS_combination bootstrap mean MRR: 0.098979854619156
 glove6B200d - COS_combination MRR is within the 95% CI [0.09886941059614901, 0.09909029864216298]
+glove6B200d - alpha_combination bootstrap mean MRR: 0.08128485711091951
+glove6B200d - alpha_combination MRR is within the 95% CI [0.0810344033490884, 0.08153531087275062]
 ----------------------------------------------------------------------------------------------------
 
 
@@ -46,6 +52,8 @@ glove6B300d - LSA_combination bootstrap mean MRR: 0.09281634242022754
 glove6B300d - LSA_combination MRR is within the 95% CI [0.0927073698239635, 0.09292531501649158]
 glove6B300d - COS_combination bootstrap mean MRR: 0.0969678390407889
 glove6B300d - COS_combination MRR is within the 95% CI [0.09685643364384702, 0.09707924443773078]
+glove6B300d - alpha_combination bootstrap mean MRR: 0.07984455027647155
+glove6B300d - alpha_combination MRR is within the 95% CI [0.07958424663075513, 0.08010485392218798]
 ----------------------------------------------------------------------------------------------------
 
 
@@ -59,6 +67,8 @@ glove42B300d - LSA_combination bootstrap mean MRR: 0.1888661765597078
 glove42B300d - LSA_combination MRR is within the 95% CI [0.18872532769459044, 0.18900702542482517]
 glove42B300d - COS_combination bootstrap mean MRR: 0.20585293655646442
 glove42B300d - COS_combination MRR is within the 95% CI [0.20570772932835654, 0.2059981437845723]
+glove42B300d - alpha_combination bootstrap mean MRR: 0.1803811046866531
+glove42B300d - alpha_combination MRR is within the 95% CI [0.18003380242688322, 0.180728406946423]
 ----------------------------------------------------------------------------------------------------
 
 
@@ -72,6 +82,8 @@ glove840B300d - LSA_combination bootstrap mean MRR: 0.14173369683889633
 glove840B300d - LSA_combination MRR is within the 95% CI [0.14160710560364764, 0.14186028807414502]
 glove840B300d - COS_combination bootstrap mean MRR: 0.1561176687216935
 glove840B300d - COS_combination MRR is within the 95% CI [0.15598769891895273, 0.15624763852443427]
+glove840B300d - alpha_combination bootstrap mean MRR: 0.13068464041019448
+glove840B300d - alpha_combination MRR is within the 95% CI [0.13037668552747056, 0.1309925952929184]
 ----------------------------------------------------------------------------------------------------
 
 
@@ -85,6 +97,8 @@ glovetwitter27B25d - LSA_combination bootstrap mean MRR: 0.022343785646424533
 glovetwitter27B25d - LSA_combination MRR is within the 95% CI [0.022284352844973144, 0.022403218447875923]
 glovetwitter27B25d - COS_combination bootstrap mean MRR: 0.0220342078216225
 glovetwitter27B25d - COS_combination MRR is within the 95% CI [0.021976857252515566, 0.022091558390729432]
+glovetwitter27B25d - alpha_combination bootstrap mean MRR: 0.02106548127017002
+glovetwitter27B25d - alpha_combination MRR is within the 95% CI [0.02092624998752001, 0.021204712552820026]
 ----------------------------------------------------------------------------------------------------
 
 
@@ -98,6 +112,8 @@ glovetwitter27B50d - LSA_combination bootstrap mean MRR: 0.04003491027562825
 glovetwitter27B50d - LSA_combination MRR is within the 95% CI [0.039952669526375155, 0.040117151024881344]
 glovetwitter27B50d - COS_combination bootstrap mean MRR: 0.04180631245450685
 glovetwitter27B50d - COS_combination MRR is within the 95% CI [0.041722142963617356, 0.04189048194539634]
+glovetwitter27B50d - alpha_combination bootstrap mean MRR: 0.03809650225744499
+glovetwitter27B50d - alpha_combination MRR is within the 95% CI [0.03788603424779295, 0.038306970267097035]
 ----------------------------------------------------------------------------------------------------
 
 
@@ -111,6 +127,8 @@ glovetwitter27B100d - LSA_combination bootstrap mean MRR: 0.06745888360481787
 glovetwitter27B100d - LSA_combination MRR is within the 95% CI [0.0673469109694056, 0.06757085624023015]
 glovetwitter27B100d - COS_combination bootstrap mean MRR: 0.07081768547369768
 glovetwitter27B100d - COS_combination MRR is within the 95% CI [0.07070347641243264, 0.07093189453496272]
+glovetwitter27B100d - alpha_combination bootstrap mean MRR: 0.06163127718028096
+glovetwitter27B100d - alpha_combination MRR is within the 95% CI [0.06136039180090084, 0.061902162559661085]
 ----------------------------------------------------------------------------------------------------
 
 
@@ -124,7 +142,6 @@ glovetwitter27B200d - LSA_combination bootstrap mean MRR: 0.1062925504847566
 glovetwitter27B200d - LSA_combination MRR is within the 95% CI [0.10615311948013116, 0.10643198148938203]
 glovetwitter27B200d - COS_combination bootstrap mean MRR: 0.11413233318972905
 glovetwitter27B200d - COS_combination MRR is within the 95% CI [0.11398686666653154, 0.11427779971292656]
+glovetwitter27B200d - alpha_combination bootstrap mean MRR: 0.10100044361828028
+glovetwitter27B200d - alpha_combination MRR is within the 95% CI [0.10066182889566727, 0.1013390583408933]
 ----------------------------------------------------------------------------------------------------
-
-
-
