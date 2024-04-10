@@ -110,3 +110,13 @@ with (open('ConfidenceInterval.txt', 'w') as file):
                     print(
                         f"{name} - {combination} MRR is NOT within the 95% CI "
                         f"[{lower_ci}, {upper_ci}]", file=file)
+            elif combination == 'alpha_combination':
+                # note: this column in data have the same value for all rows
+                if lower_ci <= data["MRR_alpha"][0] <= upper_ci:
+                    print(
+                        f"{name} - {combination} MRR is within the 95% CI "
+                        f"[{lower_ci}, {upper_ci}]", file=file)
+                else:
+                    print(
+                        f"{name} - {combination} MRR is NOT within the 95% CI "
+                        f"[{lower_ci}, {upper_ci}]", file=file)
